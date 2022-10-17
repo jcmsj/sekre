@@ -6,8 +6,7 @@ export function useToggle(value = false) {
     const [on, setOn] = useState(value);
     return { on, setOn, toggle() { setOn(!on) } };
 }
-export default function ItemUI({ id, label }) {
-    const { on, toggle } = useToggle();
+export default function ItemUI({item:{ id, name }}) {
     return <Card
         style={style.card}
     >
@@ -17,7 +16,7 @@ export default function ItemUI({ id, label }) {
             <Text
                 style={style.titleText}
             >
-                {label}
+                {name} 
             </Text>
             <Card.Actions>
                 <IconButton

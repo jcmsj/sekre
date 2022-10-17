@@ -2,56 +2,53 @@ import { useState } from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import {
   Appbar,
-  TextInput,
 } from 'react-native-paper';
-import Secret from '../lib/Secret';
 import TopBar from "../components/TopBar";
-function OutlinedInput(props) {
-  return <TextInput
-    mode="outlined"
-    {...props}
-  />;
-}
+import OutlinedInput from "../components/OutlinedInput";
+import { add } from '../storage/secret';
+import { Sekre } from '../lib/Secret';
+
 export default function CreationPage() {
-  /**
-   * @type {[Secret, Dispatch<SetStateAction<Secret>]}
-   */
-  const [secret, setSecret] = useState();
-  const [raw, setRaw] = useState("");
+  const [secret, setSecret] = useState("");
+  const [key, setKey] = useState("");
+  const [purpose, setPurpose] = useState("");
+  function make() {
+    const s =  new Sekre({name:purpose, secret, key})
+    try {
+      add(s);
+    } catch (error) {
+      console.log(error);      
+    }
+    return s
+  }
   return <SafeAreaView>
     <TopBar title="New secret">
       <Appbar.Action
         disabled={secret == undefined}
         icon="check"
-        onPress={() => { }}
-        style={{alignSelf:"flex-end"}}
+        onPress={() => {alert(JSON.stringify(make()))}}
+        style={{ alignSelf: "flex-end" }}
       />
     </TopBar>
     <OutlinedInput
       label="for"
+      onChangeText={setPurpose}
     />
     <OutlinedInput
       label="secret"
       keyboardType="password"
       secureTextEntry
-      onSubmitEditing={e => {
-        setRaw(e.nativeEvent.text)
-      }}
+      onChangeText={setSecret}
     />
     <OutlinedInput
       label="Key"
       icon="eye"
       secureTextEntry
-      onSubmitEditing={e => {
-        const s = new Secret({ text: raw, key: e.nativeEvent.text, method: "AES" })
-        setSecret(s)
-      }}
+      onChangeText={setKey}
     />
   </SafeAreaView>;
 }
 
 const style = StyleSheet.create({
-  major_button: {
-    width: "100%"
-  }
+
 })
