@@ -29,8 +29,8 @@ export async function add(s) {
   r.write(() => {
     r.create(SekreSchema.name, {
       //Auto increment - https://github.com/realm/realm-js/issues/746
+      ...s,
       id: new Realm.BSON.ObjectID()
-      , ...s
     })
   })
 }

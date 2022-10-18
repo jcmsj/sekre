@@ -8,8 +8,7 @@ import { getRealm, SekreSchema } from "../storage/secret";
 /**
  * @param {{route,jumpTo}} param0 
  */
-export default function StatefulList({route, jumpTo}) {
-    console.log(route, jumpTo);
+export default function StatefulList({ route, jumpTo }) {
     const [secrets, setSecrets] = useState();
     const [refreshing, setRefreshing] = useState(false);
     async function retrieve() {
@@ -37,7 +36,7 @@ export default function StatefulList({route, jumpTo}) {
     return <StatelessList
         title={route.title}
         secrets={secrets}
-        flatListProps={{refreshControl}}
+        flatListProps={{ refreshControl }}
     />
 }
 
@@ -48,9 +47,9 @@ export default function StatefulList({route, jumpTo}) {
  */
 export function StatelessList({ title, secrets, flatListProps }) {
     return <SafeAreaView
-    style={{height:"100%"}}
+        style={{ height: "100%" }}
     >
-        <TopBar 
+        <TopBar
             title={title}
         >
             <Appbar.Action icon="magnify" onPress={() => { }} />
