@@ -33,7 +33,6 @@ export default function CreationPage() {
           }
           clear()
         }}
-        style={{ alignSelf: "flex-end" }}
       />
     </TopBar>
     <OutlinedInput

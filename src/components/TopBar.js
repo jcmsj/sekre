@@ -1,14 +1,18 @@
 import { Appbar } from "react-native-paper";
-import GlobalStyle from "../lib/GlobalStyle";
 import { StyleSheet } from "react-native";
 
-export default function TopBar({ title, children, ...props }) {
+export default function TopBar({ title, children, onBack, ...props }) {
     return <Appbar
         {...props}
     >
         <Appbar.Header
-            style={[GlobalStyle.row, style.appHeader]}
-        >
+            style={[style.appHeader]}
+        >   
+            {
+                onBack ?
+                <Appbar.BackAction onPress={onBack}/>
+                :null
+            }
             <Appbar.Content title={title} />
             {children}
         </Appbar.Header>
@@ -17,7 +21,9 @@ export default function TopBar({ title, children, ...props }) {
 
 export const style = StyleSheet.create({
     appHeader: {
-        justifyContent: "flex-end",
-        alignItems: "center"
+        flex:1,
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        width:"100%"
     },
 })
