@@ -14,6 +14,9 @@ import SettingsPage from './src/routes/SettingsPage';
 import CreationPage from "./src/routes/CreationPage"
 import ListPage from './src/routes/ListPage';
 
+/**
+ * @link https://callstack.github.io/react-native-paper/bottom-navigation.html
+ */
 const Tabs = () => {
   const [index, setIndex] = React.useState(2);
   const [routes] = React.useState([
@@ -33,6 +36,7 @@ const Tabs = () => {
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
+      shifting
     />
   );
 };
