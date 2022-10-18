@@ -26,11 +26,10 @@ export function Tabs() {
     list: ListPage,
   });
 
-  return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-      shifting />
-  );
+  return <BottomNavigation
+    navigationState={{ index, routes }}
+    onIndexChange={setIndex}
+    renderScene={renderScene}
+    shifting
+  />
 }
