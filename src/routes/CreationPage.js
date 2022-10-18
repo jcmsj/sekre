@@ -7,18 +7,17 @@ import TopBar from "../components/TopBar";
 import OutlinedInput from "../components/OutlinedInput";
 import { add } from '../storage/secret';
 import { Sekre } from '../lib/Secret';
+import { KeyField } from '../components/KeyField';
+import { useClear } from '../lib/useClear';
 
 export default function CreationPage() {
   const [secret, setSecret] = useState("");
   const [key, setKey] = useState("");
   const [purpose, setPurpose] = useState("");
-  function make() {
-    const s =  new Sekre({name:purpose, secret, key})
-    try {
-      add(s);
-    } catch (error) {
-      console.log(error);      
-    }
+  const clear = useClear(secret, setKey, setPurpose);
+  async function make() {
+    const s = new Sekre({ name: purpose, secret, key })
+    await add(s);
     return s
   }
   return <SafeAreaView>
@@ -26,24 +25,28 @@ export default function CreationPage() {
       <Appbar.Action
         disabled={secret == undefined}
         icon="check"
-        onPress={() => {alert(JSON.stringify(make()))}}
+        onPress={async() => {
+          try {
+            await make()
+          } catch (error) {
+            console.log(error);
+          }
+          clear()
+        }}
         style={{ alignSelf: "flex-end" }}
       />
     </TopBar>
     <OutlinedInput
-      label="for"
+      label="Name"
       onChangeText={setPurpose}
     />
     <OutlinedInput
-      label="secret"
+      label="Secret"
       keyboardType="password"
       secureTextEntry
       onChangeText={setSecret}
     />
-    <OutlinedInput
-      label="Key"
-      icon="eye"
-      secureTextEntry
+    <KeyField
       onChangeText={setKey}
     />
   </SafeAreaView>;

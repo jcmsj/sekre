@@ -1,4 +1,4 @@
-import Realm, { UpdateMode } from "realm"
+import Realm from "realm"
 import { Sekre } from '../lib/Secret';
 
 export const SekreSchema = {
