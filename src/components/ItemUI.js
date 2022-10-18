@@ -1,42 +1,43 @@
 import { useState } from "react";
-import { Button, Card, Checkbox, IconButton, TouchableRipple } from "react-native-paper";
+import { Card, IconButton, TouchableRipple } from "react-native-paper";
 import { StyleSheet, View, Text } from "react-native";
 import GlobalStyle from "../lib/GlobalStyle"
 export function useToggle(value = false) {
     const [on, setOn] = useState(value);
     return { on, setOn, toggle() { setOn(!on) } };
 }
-export default function ItemUI({item:{ id, name }}) {
+
+const rippleColor = "rgba(0, 0, 0, .15)"
+export default function ItemUI({ item: { id, name } }) {
     return <Card
         style={style.card}
     >
-        <View
-            style={[GlobalStyle.row, style.view]}
+        <TouchableRipple
+            rippleColor={rippleColor}
+            onPress={() => { }}
         >
-            <Text
-                style={style.titleText}
+            <View
+                style={[GlobalStyle.row, style.view]}
             >
-                {name} 
-            </Text>
-            <Card.Actions>
-                <IconButton
-                    icon="pencil"
-                    rippleColor="rgba(0, 0, 0, .22)"
-                    onPress={() => { }}
-                />
-                <IconButton
-                    icon="eye"
-                    rippleColor="rgba(0, 0, 0, .22)"
-                    onPress={() => { }}
-                />
-                <IconButton
-                    icon="content-copy"
-                    rippleColor="rgba(0, 0, 0, .22)"
-                    onPress={() => { }}
-                />
-            </Card.Actions>
-
-        </View>
+                <Text
+                    style={style.titleText}
+                >
+                    {name}
+                </Text>
+                <Card.Actions>
+                    <IconButton
+                        icon="eye"
+                        rippleColor={rippleColor}
+                        onPress={() => { }}
+                    />
+                    <IconButton
+                        icon="content-copy"
+                        rippleColor={rippleColor}
+                        onPress={() => { }}
+                    />
+                </Card.Actions>
+            </View>
+        </TouchableRipple>
     </Card>;
 }
 
