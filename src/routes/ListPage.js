@@ -5,7 +5,11 @@ import ItemUI from "../components/ItemUI";
 import TopBar from "../components/TopBar";
 import { getRealm, SekreSchema } from "../storage/secret";
 
-export default function StatefulList() {
+/**
+ * @param {{route,jumpTo}} param0 
+ */
+export default function StatefulList({route, jumpTo}) {
+    console.log(route, jumpTo);
     const [secrets, setSecrets] = useState();
     const [refreshing, setRefreshing] = useState(false);
     async function retrieve() {
@@ -31,6 +35,7 @@ export default function StatefulList() {
     />
 
     return <StatelessList
+        title={route.title}
         secrets={secrets}
         flatListProps={{refreshControl}}
     />
@@ -41,10 +46,13 @@ export default function StatefulList() {
  * @param {*} param0 
  * @returns 
  */
-export function StatelessList({ secrets, flatListProps }) {
+export function StatelessList({ title, secrets, flatListProps }) {
     return <SafeAreaView
+    style={{height:"100%"}}
     >
-        <TopBar title="List">
+        <TopBar 
+            title={title}
+        >
             <Appbar.Action icon="magnify" onPress={() => { }} />
         </TopBar>
         <FlatList
@@ -59,8 +67,5 @@ export function StatelessList({ secrets, flatListProps }) {
 }
 
 export const style = StyleSheet.create({
-    appHeader: {
-        justifyContent: "flex-end",
-        alignItems: "center"
-    },
+
 })
