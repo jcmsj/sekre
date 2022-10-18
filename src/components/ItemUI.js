@@ -8,13 +8,13 @@ export function useToggle(value = false) {
 }
 
 const rippleColor = "rgba(0, 0, 0, .15)"
-export default function ItemUI({ item: { id, name } }) {
+export default function ItemUI({ item: { id, name }, onPress }) {
     return <Card
         style={style.card}
     >
         <TouchableRipple
             rippleColor={rippleColor}
-            onPress={() => { }}
+            onPress={onPress}
         >
             <View
                 style={[GlobalStyle.row, style.view]}
@@ -28,7 +28,7 @@ export default function ItemUI({ item: { id, name } }) {
                     <IconButton
                         icon="eye"
                         rippleColor={rippleColor}
-                        onPress={() => { }}
+                        onPress={() => {}}/* TODO! */
                     />
                     <IconButton
                         icon="content-copy"

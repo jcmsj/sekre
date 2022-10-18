@@ -4,11 +4,35 @@ import { Appbar } from "react-native-paper";
 import ItemUI from "../components/ItemUI";
 import TopBar from "../components/TopBar";
 import { getRealm, SekreSchema } from "../storage/secret";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Editor } from "./EditPage";
+import { Sekre } from "../lib/Secret";
+
+
+const Stack = createNativeStackNavigator();
+export default function Page() {
+    return <NavigationContainer>
+        <Stack.Navigator
+            initialRouteName="list"
+            screenOptions={{ headerShown: false }}
+        >
+            <Stack.Screen
+                name="list"
+                component={StatefulList}
+            />
+            <Stack.Screen
+                name="edit"
+                component={Editor}
+            />
+        </Stack.Navigator>
+    </NavigationContainer>
+}
 
 /**
  * @param {{route,jumpTo}} param0 
  */
-export default function StatefulList({ route, jumpTo }) {
+ export function StatefulList({ navigation }) {
     const [secrets, setSecrets] = useState();
     const [refreshing, setRefreshing] = useState(false);
     async function retrieve() {
@@ -21,7 +45,7 @@ export default function StatefulList({ route, jumpTo }) {
         retrieve()
     }, []);
     const onRefresh = useCallback(
-        async() => {
+        async () => {
             setRefreshing(true)
             await retrieve()
             setRefreshing(false)
@@ -33,10 +57,18 @@ export default function StatefulList({ route, jumpTo }) {
         onRefresh={onRefresh}
     />
 
+    /**
+     * @param {Sekre} sekre
+     */
+    function goEdit(sekre) {
+        navigation.navigate("edit", { sekre });
+    }
+
     return <StatelessList
-        title={route.title}
+        title="List"
         secrets={secrets}
         flatListProps={{ refreshControl }}
+        onSelect={goEdit}
     />
 }
 
@@ -45,7 +77,7 @@ export default function StatefulList({ route, jumpTo }) {
  * @param {*} param0 
  * @returns 
  */
-export function StatelessList({ title, secrets, flatListProps }) {
+export function StatelessList({ title, secrets, flatListProps, onSelect }) {
     return <SafeAreaView
         style={{ height: "100%" }}
     >
@@ -56,7 +88,11 @@ export function StatelessList({ title, secrets, flatListProps }) {
         </TopBar>
         <FlatList
             keyExtractor={item => item.id}
-            renderItem={({ item }) => <ItemUI item={item} />}
+            renderItem={({ item }) => <ItemUI 
+                    item={item} 
+                    onPress={e => onSelect(item,e)} 
+                />
+            }
             data={secrets}
             extraData={secrets}
 
