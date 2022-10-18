@@ -9,16 +9,35 @@ import { add } from '../storage/secret';
 import { Sekre } from '../lib/Secret';
 import { KeyField } from '../components/KeyField';
 import { useClear } from '../lib/useClear';
+import { pages } from '../Tabs';
 
-export default function CreationPage() {
+export default function CreationPage({route, jumpTo, }) {
+  /**
+   * @param {Sekre} sekre 
+   */
+  const onSubmit = async(sekre) => {
+      try {
+        await add(sekre);
+        //clear()
+        jumpTo(pages.list)
+      } catch (error) {
+        console.log(error);
+      }
+  }
+
+  //const clear = useClear(setSecret, setKey, setPurpose);
+
+  return <Form
+    onSubmit={onSubmit}
+  >
+  </Form>
+}
+export function Form({onSubmit}) {
   const [secret, setSecret] = useState("");
   const [key, setKey] = useState("");
   const [purpose, setPurpose] = useState("");
-  const clear = useClear(secret, setKey, setPurpose);
-  async function make() {
-    const s = new Sekre({ name: purpose, secret, key })
-    await add(s);
-    return s
+  function make() {
+    return new Sekre({ name: purpose, secret, key })
   }
   return <SafeAreaView>
     <TopBar title="New secret">
@@ -26,12 +45,7 @@ export default function CreationPage() {
         disabled={secret == undefined}
         icon="check"
         onPress={async() => {
-          try {
-            await make()
-          } catch (error) {
-            console.log(error);
-          }
-          clear()
+          onSubmit(make())
         }}
       />
     </TopBar>
