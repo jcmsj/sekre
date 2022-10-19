@@ -20,7 +20,7 @@
    
 ### Secret List (Major)
 #### Top bar
-- [ ] Shows the title `Manage secrets`.
+- [x] Shows the title `Manage secrets`.
 - [x] Show list of `secret`s.
 - [x] Tapping an item navigates to the `secret` editor.
 - [x] Items that use the `main key` has quick action buttons:
@@ -30,7 +30,7 @@
 ### Creation Form (Major)
 #### Top bar
 - [x] Submit button at the top bar.
-- [ ] Shows the title "Create".
+- [x] Shows the title `Create secret`.
 
 #### Text fields:
 - [x] Secret's label.

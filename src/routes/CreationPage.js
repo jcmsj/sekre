@@ -50,7 +50,7 @@ export function Form({ onSubmit, clearSignal }) {
   const clear = useClear(setSecret, setKey, setPurpose);
 
   return <SafeAreaView>
-    <TopBar title="New secret">
+    <TopBar title="Create secret">
       <Appbar.Action
         disabled={secret == undefined}
         icon="check"

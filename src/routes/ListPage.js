@@ -62,7 +62,7 @@ export function StatefulList({ navigation }) {
     }
 
     return <StatelessList
-        title="List"
+        title="Manage secrets"
         secrets={secrets}
         flatListProps={{ refreshControl }}
         onSelect={goEdit}
