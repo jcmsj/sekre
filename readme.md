@@ -7,7 +7,7 @@ A mobile password manager built with react native.
 ### Copying the project.
 1. `cd` to the directory in which the project folder will be created in step 2.
 1. `git clone https://github.com/jcmsj/sekre.git`.
-   - If you don't know git you can learn the basics here: (https://youtu.be/hwP7WQkmECE).
+   - If you don't know git you can learn the basics [here](https://youtu.be/hwP7WQkmECE).
 1. `cd <project_folder>` (e.g. `cd sekre`)
 1. `npm install`.
 
