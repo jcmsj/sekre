@@ -41,5 +41,9 @@
     "email": "sanjuan.jeancarlo@gmail.com",
     "name": "San Juan, Jean Carlo",
     "url": "https://github.com/jcmsj/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcmsj/sekre"
   }
 }
