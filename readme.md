@@ -29,4 +29,4 @@ A mobile password manager built with react native.
 * VS Code
   1. Start the emulator by going to the `AVD Manager tab` in the sidebar.  
   2. Start the `react native packager` (there's a button at the bottom of the window).
-  3. Start the app by clicking the play button near the left of the filename tabs.
+  3. Start the app by clicking the play button near the right of the filename tabs.
