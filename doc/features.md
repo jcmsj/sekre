@@ -23,13 +23,15 @@
 - [x] Shows the title `Manage secrets`.
 - [x] Show list of `secret`s.
 - [x] Tapping an item navigates to the `secret` editor.
-- [x] Items that use the `main key` has quick action buttons:
+- [x] Pull down gesture refreshes list.
+- [x] Each item has quick action buttons:
   - [ ] Show button 
     - [ ] Reveals the `secret`.
     - [x] UI
   - [ ] Copy button 
-    - [ ] Copies the `secret` to the clipboard.
+    - [ ] Copies the `secret` to the clipboard using [@react-native-clipboard/clipboard](https://www.npmjs.com/package/@react-native-clipboard/clipboard).
     - [x] UI
+  -  _Implimentation note_: Authentication is still required after tapping these unless the secret uses the `main key`.
 - [ ] Filter secrets
   - [ ] by label
   - [x] UI
