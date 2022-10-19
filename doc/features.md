@@ -24,9 +24,15 @@
 - [x] Show list of `secret`s.
 - [x] Tapping an item navigates to the `secret` editor.
 - [x] Items that use the `main key` has quick action buttons:
-  - [x] Show button - Reveals the `secret`.
-  - [x] Copy button - Copies the `secret` to the clipboard.
-
+  - [ ] Show button 
+    - [ ] Reveals the `secret`.
+    - [x] UI
+  - [ ] Copy button 
+    - [ ] Copies the `secret` to the clipboard.
+    - [x] UI
+- [ ] Filter secrets
+  - [ ] by label
+  - [x] UI
 ### Creation Form (Major)
 #### Top bar
 - [x] Submit button at the top bar.
