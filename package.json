@@ -35,5 +35,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "author": {
+    "email": "sanjuan.jeancarlo@gmail.com",
+    "name": "San Juan, Jean Carlo",
+    "url": "https://github.com/jcmsj/"
   }
 }
