@@ -14,9 +14,9 @@
    * For Navigation between major pages.
 2. Main content.
 3. Top bar
-   1. For going back
-   2. Page title
-   3. Major buttons
+   1. For going back.
+   2. Page title.
+   3. Major buttons.
    
 ### Secret List (Major)
 #### Top bar
@@ -41,12 +41,12 @@
 - [ ] Use main password.
 - [ ] Generate `secret`.
 - [ ] Clear inputs.
-- [ ] - Visibility toggles for `key` and `secret`.
+- [ ] Visibility toggles for `key` and `secret`.
 #### Submission
 - [ ] Validation.
   - [ ] Focus non-empty fields.
   - [ ] No duplicate label.
-- [x] Encrypt `secret` using [Crypto JS's AES-256](https://cryptojs.gitbook.io/docs/).
+- [x] Encrypt `secret` using [Crypto JS' AES-256](https://cryptojs.gitbook.io/docs/).
 - [x] Insert `secret` to the local DB.
 
 ### Secret Editor
