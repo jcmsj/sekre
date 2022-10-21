@@ -5,25 +5,31 @@ import {
 } from 'react-native-paper';
 import TopBar from "../components/TopBar";
 import OutlinedInput from "../components/OutlinedInput";
-import { add } from '../storage/secret';
 import { Sekre } from '../lib/Secret';
 import { KeyField } from '../components/KeyField';
 import { useClear } from '../lib/useClear';
 import { pages } from '../Tabs';
+import { context } from "../storage/secret";
+const { useRealm, RealmProvider } = context;
 
-export default function CreationPage({route, jumpTo, }) {
+export default function CreationPage(props) {
+  return <RealmProvider>
+    <StatefulForm {...props} />
+  </RealmProvider>
+}
+
+export function StatefulForm({ route, jumpTo, }) {
   const [clearSignal, setSignal] = useState(false)
+  const realm = useRealm()
   /**
-   * @param {Sekre} sekre 
+   * @param {import('../lib/Secret').VisibleSekre} sekre 
    */
   const onSubmit = async(sekre) => {
-      try {
-        await add(sekre);
-        setSignal(!clearSignal)
-        jumpTo(pages.list)
-      } catch (error) {
-        console.log(error);
-      }
+    realm.write(() => {
+      realm.create(Sekre.schema.name, Sekre.generate(sekre))
+    })
+    setSignal(!clearSignal)
+    jumpTo(pages.list)
   }
 
   return <Form
@@ -45,14 +51,14 @@ export function Form({ onSubmit, clearSignal }) {
     clear();
   }, [clearSignal])
   function make() {
-    return new Sekre({ name: purpose, secret, key })
+    return { name: purpose, secret, key }
   }
   const clear = useClear(setSecret, setKey, setPurpose);
-
+  const isInvalid = () => [secret,key,purpose].some(input => input.length <=0)
   return <SafeAreaView>
     <TopBar title="Create secret">
       <Appbar.Action
-        disabled={secret == undefined}
+        disabled={isInvalid()}
         icon="check"
         onPress={() => {
           onSubmit(make());

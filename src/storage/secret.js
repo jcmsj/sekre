@@ -1,47 +1,20 @@
 import 'react-native-get-random-values';
-import Realm from "realm"
 import { Sekre } from '../lib/Secret';
+import {createRealmContext} from "@realm/react"
 
-export const SekreSchema = {
-  name: "sekre",
-  properties: {
-    id: "objectId",
-    name: "string",
-    secret: "string",
-  }
-}
-
-export async function getRealm() {
-  realm = realm ?? Realm.open({
-    schema: [SekreSchema],
-  });
-  return realm;
-}
-
-/** @type {Realm} */
-export let realm;
-getRealm();
-/**
- * @param {Sekre} s 
- */
-export async function add(s) {
-  const r = await getRealm();
-  r.write(() => {
-    r.create(SekreSchema.name, {
-      //Auto increment - https://github.com/realm/realm-js/issues/746
-      ...s,
-      id: new Realm.BSON.ObjectID()
-    })
-  })
-}
-
-/**
-* @param {string} key
-* @param {Sekre} s
-*/
-export function remove(key, s) {
-  console.log(
-    s.decrypt(key)
-  );
-  //realm.delete(s)
-}
+export const context = createRealmContext({
+    schema:[Sekre],
+    schemaVersion:2,
+    migration: (oldReam, newRealm) => {
+      //https://www.mongodb.com/docs/realm/sdk/react-native/examples/modify-an-object-schema/#std-label-react-native-modify-an-object-schema
+      if (oldReam.schemaVersion < 2) {
+        const oldItems = oldReam.objects("sekre")
+        const newItems = newRealm.objects("sekre")
+        for (const key in oldItems) {
+          const updated = newItems[key]
+          updated.id = oldItems[key].id.toHexString()
+        }
+      }
+    }
+    
+});

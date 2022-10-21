@@ -48,6 +48,7 @@ const style = StyleSheet.create({
     },
     card: {
         marginVertical: 2,
+        marginHorizontal: 6,
     },
     view: {
         alignItems: "center",

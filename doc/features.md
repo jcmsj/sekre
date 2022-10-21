@@ -2,7 +2,7 @@
 ## App name
 * The app's name is `Sekre` meaning __secure__ in _Norwegian_.
 ## Backend
-- [x] Use [Realm JS](https://www.mongodb.com/docs/realm/sdk/react-native/).
+- [x] Use [Realm React](https://www.mongodb.com/docs/realm/sdk/react-native/use-realm-react/).
 ### Persist data (Own table)
 - [ ] Store `main key`.
 - [ ] Table containing IDs of secrets that use the `main key`.
@@ -52,6 +52,7 @@
 - [ ] Visibility toggles for `key` and `secret`.
 #### Submission
 - [ ] Validation.
+  - [x] Hide button unless valid
   - [ ] Focus non-empty fields.
   - [ ] No duplicate label.
 - [x] Encrypt `secret` using [Crypto JS' AES-256](https://cryptojs.gitbook.io/docs/).
@@ -63,9 +64,15 @@
 #### Secondary bottom navigation bar.
 _buttons displayed from right to left._
 - [ ] Delete
+  - [x] UI
+  - [x] Logic
 - [ ] Edit (optional)
 - [ ] Show
+  - [ ] UI
+  - [ ] Logic
 - [ ] Copy
+  - [ ] UI
+  - [ ] Logic
 
 ### Auth Page
 - [ ] Title shows intent.
