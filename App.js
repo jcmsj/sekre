@@ -31,7 +31,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.paddingTop,
   },
 });
 export default App;
