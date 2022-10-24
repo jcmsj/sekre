@@ -8,8 +8,8 @@ export const context = createRealmContext({
     migration: (oldReam, newRealm) => {
       //https://www.mongodb.com/docs/realm/sdk/react-native/examples/modify-an-object-schema/#std-label-react-native-modify-an-object-schema
       if (oldReam.schemaVersion < 2) {
-        const oldItems = oldReam.objects("sekre")
-        const newItems = newRealm.objects("sekre")
+        const oldItems = oldReam.objects(Sekre.schema.name)
+        const newItems = newRealm.objects(Sekre.schema.name)
         for (const key in oldItems) {
           const updated = newItems[key]
           updated.id = oldItems[key].id.toHexString()
