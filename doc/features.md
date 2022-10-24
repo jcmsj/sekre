@@ -4,7 +4,7 @@
 ## Backend
 - [x] Use [Realm React](https://www.mongodb.com/docs/realm/sdk/react-native/use-realm-react/).
 ### Persist data (Own table)
-- [ ] Store `main key`.
+- [x] Store `main key`.
 - [x] Table containing IDs of secrets that use the `main key`.
 - [X] Secrets table.
   
