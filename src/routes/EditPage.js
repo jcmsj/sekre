@@ -5,6 +5,7 @@ import { context as secretsContext } from "../storage/secret";
 import { Sekre } from "../lib/Secret";
 import { StyleSheet } from "react-native";
 import { useState } from "react";
+import Clipboard from "@react-native-clipboard/clipboard";
 const { useRealm } = secretsContext;
 export function Editor({ navigation, route }) {
     const realm = useRealm()
@@ -55,6 +56,7 @@ export function Editor({ navigation, route }) {
         <List.Item
             left={props => <IconButton icon="content-copy" />}
             title="copy"
+            onPress={() => Clipboard.setString(tryWithDefault())}
         />
     </SafeAreaView>
 }

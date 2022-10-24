@@ -4,16 +4,16 @@ import { encrypt, keyOfMainKey, MasterSchema, getMainkey } from "../storage/mast
 import { context } from "../storage/secret"
 import AuthPage from "./AuthPage"
 import { Realm } from "@realm/react";
-const { useRealm } = context;
+const { useRealm, useQuery } = context;
 
 export default function({ onVerify }) {
     const realm = useRealm()
     const maybeMainkey = getMainkey(realm);
     const [isRegistered, setRegistrationStatus] = useState(false)
-
+    const keys = useQuery(MasterSchema.name)
     useEffect(() => {
-        setRegistrationStatus(realm.objects(MasterSchema.name).length > 0)
-    }, [maybeMainkey])
+        setRegistrationStatus(keys.length > 0)
+    }, [keys])
 
     const matches = key => {
         onVerify(encrypt(key) == maybeMainkey.cipher)

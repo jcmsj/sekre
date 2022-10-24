@@ -5,7 +5,7 @@
 - [x] Use [Realm React](https://www.mongodb.com/docs/realm/sdk/react-native/use-realm-react/).
 ### Persist data (Own table)
 - [ ] Store `main key`.
-- [ ] Table containing IDs of secrets that use the `main key`.
+- [x] Table containing IDs of secrets that use the `main key`.
 - [X] Secrets table.
   
 ## Frontend
@@ -46,7 +46,7 @@
 - [x] The `key` for the `secret`.
 
 #### Buttons:
-- [ ] Use main password.
+- [x] Use main password.
 - [ ] Generate `secret`.
 - [ ] Clear inputs.
 - [ ] Visibility toggles for `key` and `secret`.
@@ -66,22 +66,25 @@ _buttons displayed from right to left._
 - [ ] Delete
   - [x] UI
   - [x] Logic
+  - [ ] Confirmation prompt
 - [ ] Edit (optional)
-- [ ] Show
-  - [ ] UI
-  - [ ] Logic
-- [ ] Copy
-  - [ ] UI
-  - [ ] Logic
+- [x] Show
+  - [x] UI
+  - [x] Logic
+- [x] Copy
+  - [x] UI
+  - [x] Logic
 
 ### Auth Page
-- [ ] Title shows intent.
-- [ ] Accepts children props.
-  - [ ] Before `key field`.
-  - [ ] After `key field`. 
+- [x] Title shows intent.
+- [x] Accepts children props.
+  - [x] Before `key field`.
+  - [x] After `key field`. 
 - [ ] Show `key field`.
 - [ ] Button to toggle `key` visibility.
-- [ ] Major buttons - Cancel and Submit.
+- [ ] Major buttons
+  - [-] Go back (unused)
+  - [x] Submit
 
 ## Settings (Major)
 - [ ] About the app.
@@ -90,5 +93,5 @@ _buttons displayed from right to left._
 - [ ] Export data.
 - [ ] Import data.
 ## Splash screen
-- [ ] On new install, setup `main key` reuse `Auth`.
+- [x] On new install, setup `main key` reuse `Auth`.
 - [ ] Guided tutorial (optional).
