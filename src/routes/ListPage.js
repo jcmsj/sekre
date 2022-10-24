@@ -2,49 +2,69 @@ import { SafeAreaView, StyleSheet, FlatList } from "react-native";
 import { Appbar } from "react-native-paper";
 import ItemUI from "../components/ItemUI";
 import TopBar from "../components/TopBar";
-import { context as secretsContext } from "../storage/secret";
+import { context } from "../storage/secret";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Editor } from "./EditPage";
 import { Sekre } from "../lib/Secret";
+import { getMainkey, MasterSchema } from "../storage/masterKey";
+import { ChainSchema } from "../storage/list";
 const Stack = createNativeStackNavigator();
-const { RealmProvider, useQuery } = secretsContext;
+const { useQuery, useRealm } = context;
 export default function Page() {
-    return <RealmProvider>
-        <NavigationContainer>
-            <Stack.Navigator
-                initialRouteName="list"
-                screenOptions={{ headerShown: false }}
-            >
-                <Stack.Screen
-                    name="list"
-                    component={StatefulList}
-                />
-                <Stack.Screen
-                    name="edit"
-                    component={Editor}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    </RealmProvider>
+    return <NavigationContainer>
+        <Stack.Navigator
+            initialRouteName="list"
+            screenOptions={{ headerShown: false }}
+        >
+            <Stack.Screen
+                name="list"
+                component={StatefulList}
+            />
+            <Stack.Screen
+                name="edit"
+                component={Editor}
+            />
+        </Stack.Navigator>
+    </NavigationContainer>
 }
 
 /**
  * @param {import("@react-navigation/native").Descriptor} param0 
  */
 export function StatefulList({ navigation }) {
+    const realm = useRealm()
+
     /**
      * @param {import("../lib/Secret").StoredSekre} sekre
      */
     function goEdit(sekre) {
-        navigation.navigate("edit", { sekre });
+        /**
+         * @type {import("../storage/masterKey").Key | undefined}
+         */
+        let key = undefined;
+        /**
+         * @type {import("../storage/list").KeyChain | undefined}
+         */
+        const maybeKeyChain = realm.objectForPrimaryKey(ChainSchema.name, sekre.id)
+        if (maybeKeyChain) {
+            /**
+             * @type {import("../storage/masterKey").Key}
+             */
+            key = realm.objectForPrimaryKey(MasterSchema.name, maybeKeyChain.keyID)
+            maybeKeyChain.keyID
+        }
+
+        navigation.navigate("edit", { 
+            sekre, key
+        });
     }
 
     return <StatelessList
         title="Manage secrets"
         onSelect={goEdit}
         secrets={useQuery(Sekre)}
-        onSearch={() => {/**TODO */}}
+        onSearch={() => {/**TODO */ }}
     />
 }
 

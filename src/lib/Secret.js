@@ -2,7 +2,7 @@
  * @implNote https://github.com/brix/crypto-js/pull/259#issuecomment-799973769
  */
 import 'react-native-get-random-values';
-import { AES } from "crypto-js"
+import { AES, enc } from "crypto-js"
 import {Realm} from "@realm/react"
 /**
  * @typedef {{name:string, secret:string}} Credential
@@ -21,7 +21,6 @@ export class Sekre  extends Realm.Object {
     secret;
     /** @type {import("realm").BSON.ObjectId} */
     id;
-
     static schema = {
         name: "sekre",
         properties: {
@@ -50,5 +49,12 @@ export class Sekre  extends Realm.Object {
             this.secret,
             key
         ).toString(CryptoJS.enc.Utf8);
+    }
+
+    /**
+     * @param {StoredSekre} sekre 
+     */
+    static prepareDecrypt(sekre) {
+        return key => AES.decrypt(sekre.secret, key).toString(enc.Utf8)
     }
 }
